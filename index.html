@@ -28,6 +28,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: #f9f9f9;
+            overflow-x: hidden;
         }
         
         .container {
@@ -39,6 +40,14 @@
         
         section {
             padding: 60px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         h1, h2, h3, h4 {
@@ -61,11 +70,18 @@
             border: none;
             cursor: pointer;
             font-weight: 600;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn:hover {
             background-color: #2980b9;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
         }
         
         .btn-download {
@@ -86,6 +102,12 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 15px 0;
+            background-color: rgba(44, 62, 80, 0.95);
         }
         
         .header-container {
@@ -96,6 +118,11 @@
         
         .logo {
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .logo h1 {
@@ -115,6 +142,7 @@
         
         nav ul li {
             margin-left: 25px;
+            position: relative;
         }
         
         nav ul li a {
@@ -122,6 +150,22 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
         }
         
         nav ul li a:hover {
@@ -132,6 +176,11 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu:hover {
+            transform: scale(1.1);
         }
         
         /* Hero Section */
@@ -140,12 +189,39 @@
             color: var(--light-text);
             padding: 150px 0 100px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,181.3C960,181,1056,203,1152,202.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            animation: wave 10s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-50px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 10px;
             color: var(--light-text);
+            animation: fadeInDown 1s ease;
         }
         
         .hero h2 {
@@ -153,6 +229,7 @@
             font-weight: 300;
             margin-bottom: 20px;
             color: var(--light-text);
+            animation: fadeInDown 1s ease 0.2s both;
         }
         
         .hero p {
@@ -160,6 +237,7 @@
             max-width: 700px;
             margin: 0 auto 30px;
             opacity: 0.9;
+            animation: fadeInDown 1s ease 0.4s both;
         }
         
         .contact-info {
@@ -168,12 +246,18 @@
             flex-wrap: wrap;
             gap: 20px;
             margin-top: 20px;
+            animation: fadeInDown 1s ease 0.6s both;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
         }
         
         /* About Section */
@@ -194,6 +278,12 @@
             height: 3px;
             background-color: var(--secondary-color);
             margin: 10px auto;
+            animation: expand 1s ease 0.5s both;
+        }
+        
+        @keyframes expand {
+            from { width: 0; }
+            to { width: 60px; }
         }
         
         /* Experience Section */
@@ -216,12 +306,26 @@
             width: 2px;
             background-color: var(--secondary-color);
             transform: translateX(-50%);
+            animation: growHeight 1.5s ease 0.3s both;
+        }
+        
+        @keyframes growHeight {
+            from { height: 0; }
+            to { height: 100%; }
         }
         
         .timeline-item {
             display: flex;
             margin-bottom: 40px;
             position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .timeline-item:nth-child(odd) {
@@ -230,6 +334,11 @@
         
         .timeline-item:nth-child(even) {
             justify-content: flex-end;
+            transform: translateX(50px);
+        }
+        
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
         }
         
         .timeline-content {
@@ -239,6 +348,12 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         .timeline-content::after {
@@ -267,6 +382,13 @@
             border-radius: 4px;
             font-size: 0.9rem;
             margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         .timeline-content h3 {
@@ -286,6 +408,14 @@
         
         .timeline-content li {
             margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .timeline-content li::before {
+            content: '▸';
+            position: absolute;
+            left: -15px;
+            color: var(--secondary-color);
         }
         
         /* Education Section */
@@ -300,6 +430,12 @@
             padding: 30px;
             background-color: #f5f7fa;
             border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .education-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         .education-item h3 {
@@ -330,6 +466,12 @@
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         .skill-category h3 {
@@ -363,6 +505,95 @@
             border-radius: 20px;
             font-size: 0.9rem;
             color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Certifications Section */
+        .certifications {
+            background-color: white;
+        }
+        
+        .certifications-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .certifications-message {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease;
+        }
+        
+        .certifications-message i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .certifications-placeholder {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .certification-card {
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certification-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .certification-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .certification-card i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            z-index: 1;
+        }
+        
+        .certification-card p {
+            font-weight: 600;
+            color: var(--primary-color);
+            z-index: 1;
         }
         
         /* Download Section */
@@ -371,6 +602,26 @@
             color: var(--light-text);
             text-align: center;
             padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23000" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,181.3C960,181,1056,203,1152,202.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            animation: wave 15s linear infinite;
+        }
+        
+        .download-content {
+            position: relative;
+            z-index: 1;
         }
         
         .download h2 {
@@ -407,17 +658,38 @@
         .social-links a {
             color: var(--light-text);
             font-size: 1.2rem;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .social-links a:hover {
             color: var(--secondary-color);
+            transform: translateY(-3px);
         }
         
         .copyright {
             margin-top: 20px;
             opacity: 0.7;
             font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         /* Responsive Styles */
@@ -452,6 +724,7 @@
             .timeline-item {
                 justify-content: flex-start !important;
                 padding-left: 60px;
+                transform: translateX(0) !important;
             }
             
             .timeline-content {
@@ -467,12 +740,17 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .certification-card {
+                width: 100%;
+                max-width: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container header-container">
             <div class="logo" id="logo">
                 <h1>Sumukh <span>Jagadish</span></h1>
@@ -484,6 +762,7 @@
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#education">Education</a></li>
                     <li><a href="#skills">Skills</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
                     <li><a href="#download">Resume</a></li>
                 </ul>
             </nav>
@@ -493,7 +772,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container">
+        <div class="container hero-content">
             <h1>Sumukh Jagadish</h1>
             <h2>Automation Test Engineer</h2>
             <p>Experienced professional with expertise in automation testing, SAP consulting, and process optimization. Passionate about developing efficient solutions and driving digital transformation.</p>
@@ -628,9 +907,37 @@
         </div>
     </section>
 
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-container">
+                <div class="certifications-message">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Certifications Section Updating</h3>
+                    <p>I'm currently working on adding my professional certifications. Please check back soon for updates!</p>
+                </div>
+                <div class="certifications-placeholder">
+                    <div class="certification-card">
+                        <i class="fas fa-award"></i>
+                        <p>Coming Soon</p>
+                    </div>
+                    <div class="certification-card">
+                        <i class="fas fa-certificate"></i>
+                        <p>Coming Soon</p>
+                    </div>
+                    <div class="certification-card">
+                        <i class="fas fa-medal"></i>
+                        <p>Coming Soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Download Section -->
     <section id="download" class="download">
-        <div class="container">
+        <div class="container download-content">
             <h2>Download My Resume</h2>
             <p>Get a PDF copy of my complete resume with all my experience, skills, and contact information.</p>
             <button id="downloadBtn" class="btn btn-download">Download Resume PDF</button>
@@ -708,6 +1015,40 @@
             // Show a confirmation message
             alert('Your resume download has started. If it doesn\'t start automatically, check your downloads folder.');
         });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('section');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Section animations
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY > sectionTop - window.innerHeight + 100) {
+                    section.classList.add('visible');
+                }
+            });
+            
+            // Timeline item animations
+            timelineItems.forEach(item => {
+                const itemTop = item.offsetTop;
+                if (window.scrollY > itemTop - window.innerHeight + 100) {
+                    item.classList.add('visible');
+                }
+            });
+        });
+
+        // Trigger animations on page load for elements already in view
+        window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
 </html>
