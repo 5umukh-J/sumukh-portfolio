@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumukh Jagadish - Automation Test Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Global Styles */
         :root {
@@ -91,6 +92,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        
+        .logo {
+            cursor: pointer;
         }
         
         .logo h1 {
@@ -469,7 +474,7 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <div class="logo">
+            <div class="logo" id="logo">
                 <h1>Sumukh <span>Jagadish</span></h1>
             </div>
             <nav>
@@ -494,15 +499,15 @@
             <p>Experienced professional with expertise in automation testing, SAP consulting, and process optimization. Passionate about developing efficient solutions and driving digital transformation.</p>
             <div class="contact-info">
                 <div class="contact-item">
-                    <i>📧</i>
+                    <i class="fas fa-envelope"></i>
                     <span>Sumukhjagadish@gmail.com</span>
                 </div>
                 <div class="contact-item">
-                    <i>📱</i>
+                    <i class="fas fa-phone"></i>
                     <span>+91 7619694014</span>
                 </div>
                 <div class="contact-item">
-                    <i>📍</i>
+                    <i class="fas fa-map-marker-alt"></i>
                     <span>Bangalore, India</span>
                 </div>
             </div>
@@ -560,7 +565,7 @@
                 <!-- Erpgenz -->
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3>Erpgenx</h3>
+                        <h3>Erpgenz</h3>
                         <h4>SAP Consultant</h4>
                         <ul>
                             <li>Specialized in leveraging the SAP Business Technology Platform to drive digital transformation and process optimization</li>
@@ -640,16 +645,16 @@
                 <p>Automation Test Engineer</p>
                 <div class="contact-info">
                     <div class="contact-item">
-                        <i>📧</i>
+                        <i class="fas fa-envelope"></i>
                         <span>Sumukhjagadish@gmail.com</span>
                     </div>
                     <div class="contact-item">
-                        <i>📱</i>
+                        <i class="fas fa-phone"></i>
                         <span>+91 7619694014</span>
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/sumukh-j" target="_blank">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/sumukh-j" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
                 </div>
                 <p class="copyright">&copy; 2023 Sumukh Jagadish. All rights reserved.</p>
             </div>
@@ -679,6 +684,14 @@
                 if (window.innerWidth <= 768) {
                     document.querySelector('nav ul').classList.remove('show');
                 }
+            });
+        });
+
+        // Logo click to go to home
+        document.getElementById('logo').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
 
